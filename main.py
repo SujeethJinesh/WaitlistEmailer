@@ -10,12 +10,12 @@ from credentials import LOGIN, PASSWORD
 email_sent = False
 iterations = 0
 headers = {'Accept-Encoding': 'identity'}
-
+proxies = {'62.122.97.66:59143', '1.10.189.45:33696', '195.239.176.98:45601', '197.188.222.163:61636'}
 
 def check_waitlist(proxy):
     global iterations
-    if iterations % 500 == 0:
-        print("checking_waitlist")
+    if iterations % 30 == 0:
+        print("checking_waitlist, iteration: ", iterations)
     iterations += 1
     try:
         response = requests.get(
@@ -53,19 +53,18 @@ def get_proxies():
     url = 'https://free-proxy-list.net/'
     response = requests.get(url)
     parser = fromstring(response.text)
-    proxies = set()
+    proxies_set = set()
     for i in parser.xpath('//tbody/tr')[:10]:
         if i.xpath('.//td[7][contains(text(),"yes")]'):
-            # Grabbing IP and corresponding PORT
             proxy = ":".join([i.xpath('.//td[1]/text()')[0], i.xpath('.//td[2]/text()')[0]])
-            proxies.add(proxy)
-    return random.choice(list(proxies))
+            proxies_set.add(proxy)
+    return proxies_set
 
 
 if __name__ == '__main__':
     while not email_sent:
-        proxy = get_proxies()
+        proxy = random.choice(list(proxies))
         if check_waitlist(proxy):
             send_email()
         rand = random.randint(1, 5)
-        time.sleep(60 + rand)
+        time.sleep(30 + rand)
