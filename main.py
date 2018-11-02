@@ -1,6 +1,5 @@
 import random
 import smtplib
-import urllib.request
 import requests
 import time
 from bs4 import BeautifulSoup
