@@ -51,7 +51,6 @@ def set_webdriver():
   wait = WebDriverWait(driver, timeout)
 
 def select_july_and_open_modal():
-  # import ipdb; ipdb.set_trace()
   global driver, wait
 
   # open date picker
