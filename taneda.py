@@ -175,8 +175,8 @@ if __name__ == '__main__':
       proxy = random.choice(list(proxies))
       try:
         check_waitlist(proxy)
-      except Exception:
-        continue
+      except Exception as e:
+        print(e)
       print("completed iteration: ", iterations)
       rand = random.randint(1, 30)
       time.sleep(ten_minutes_in_seconds + rand) # check every 10 mins along with a randomizer
