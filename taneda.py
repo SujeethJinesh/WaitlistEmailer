@@ -44,7 +44,7 @@ def get_list_of_elements_found(value, tag_name):
 def set_webdriver():
   global driver, wait
   options = Options()
-  # options.headless = True
+  options.headless = True
   service = Service(ChromeDriverManager().install())
   
   driver = webdriver.Chrome(options=options, service=service)
@@ -177,5 +177,6 @@ if __name__ == '__main__':
         check_waitlist(proxy)
       except Exception:
         continue
+      print("completed iteration: ", iterations)
       rand = random.randint(1, 30)
       time.sleep(ten_minutes_in_seconds + rand) # check every 10 mins along with a randomizer
